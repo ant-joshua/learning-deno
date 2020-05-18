@@ -10,7 +10,7 @@
 - [x] Register
 - [x] Connect To MongoDB
 - [x] CRUD Category
-- [ ] Login
+- [x] Login
 - [ ] Validation
 - [ ] Error Handling
 - [ ] Websocket
@@ -24,5 +24,4 @@
 - [x] Use deps.ts
 - [x] dotenv
 - [x] Auth Middleware (JWT)
-- [ ] Log Middleware
 - [x] Cors Middleware
