@@ -1,9 +1,11 @@
 # learning-deno
 "Awalnya sih coba2, tapi akhirnya ketagihan" - sebut saja mawar
 
-## Stack
-- MongoDB
-- OAK (Deno Framework)
+## Package
+- [Mongo](https://deno.land/x/deno_mongo)
+- [OAK](https://deno.land/x/oak)
+- [JWT](https://deno.land/x/djwt)
+- [Dotenv](https://deno.land/x/dotenv)
 
 ## Todo
 - [x] JWT 
