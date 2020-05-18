@@ -1,21 +1,23 @@
-import { Request, Response, RouteParams, State } from "https://deno.land/x/oak/mod.ts";
+import {
+  Request,
+  Response,
+  RouteParams,
+  State,
+} from "https://deno.land/x/oak/mod.ts";
 import db from "../../db.ts";
+import { Category } from "../models/category.ts";
 
 const database = db.getDatabase;
 const categories = database.collection("categories");
 
-interface Category {
-  _id: {
-    $oid: string;
-  };
-  name: string;
-}
-
 export const getCategories = async (
-  { state, request, response }: {state: State , request: Request; response: Response },
+  { state, request, response }: {
+    state: State;
+    request: Request;
+    response: Response;
+  },
 ) => {
   const fetchedCategories: Category[] = await categories.find();
-  
 
   if (fetchedCategories) {
     const list = fetchedCategories.length
@@ -44,7 +46,7 @@ export const createCategory = async (
     }
 
     const insertedCategory = await categories.insertOne({
-      name
+      name,
     });
 
     response.body = JSON.stringify({ mantul: insertedCategory });
@@ -53,7 +55,7 @@ export const createCategory = async (
   }
 };
 
-export const fetchOneCategory = async (
+export const getCategory = async (
   { params, response }: { params: RouteParams; response: Response },
 ) => {
   try {

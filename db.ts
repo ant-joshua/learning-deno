@@ -1,4 +1,4 @@
-import { init, MongoClient } from "https://deno.land/x/mongo@v0.6.0/mod.ts";
+import { init, MongoClient } from "./deps.ts";
 
 await init();
 

@@ -1,38 +1,32 @@
 import { Application } from "https://deno.land/x/oak/mod.ts";
-import { validateJwt } from "https://deno.land/x/djwt/validate.ts"
-import router from "./router.ts";
-import authRouter from './authRouter.ts';
-import { getUserByUsername } from './src/models/user.ts';
+
+// Router
+import router from "./src/router/router.ts";
+import authRouter from "./src/router/authRouter.ts";
+// Middleware
+import { auth } from "./src/middleware/auth.middleware.ts";
+import { logger } from "./src/middleware/logger.middleware.ts";
+import { timing } from "./src/middleware/timing.middleware.ts";
+import { cors, CORSConfig } from "./src/middleware/cors.middleware.ts";
 
 const app = new Application();
+// Cors Configuration
+const config: CORSConfig = {
+  allowOrigins: ["*"],
+  // allowMethods: ["GET","POST","PUT"],
+};
 
+app.use(logger);
+app.use(timing);
+app.use(cors(config));
 
 app.use(router.routes());
-app.use(router.allowedMethods())
-
-const key = "emangmantul123"
+app.use(router.allowedMethods());
 // authorization middleware
-app.use(async (ctx, next) => {
-    ctx.response.headers.set("Content-Type",'application/json');
-    const authorization = ctx.request.headers.get("Authorization");
-    const jwt = authorization?.replace("Bearer ", "") ?? '';
-    const tokenValid = await validateJwt(jwt, key, { isThrowing: false });
-    // console.log(tokenValid);
-    if (tokenValid) {
-      let {payload} = tokenValid
-      ctx.state.currentUser =  await getUserByUsername(payload?.iss)
-      await next();
-      return;
-    }
-    
-    ctx.response.body = JSON.stringify({ error: "Not authorized" });
-});
+app.use(auth);
 // Protected Routes
 app.use(authRouter.routes());
 app.use(authRouter.allowedMethods());
-
-
-
 
 await app.listen({ port: 8000 });
 
