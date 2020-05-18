@@ -1,4 +1,4 @@
-import { Application } from "https://deno.land/x/oak/mod.ts";
+import { Application } from "./deps.ts";
 
 // Router
 import router from "./src/router/router.ts";
@@ -22,6 +22,7 @@ app.use(cors(config));
 
 app.use(router.routes());
 app.use(router.allowedMethods());
+
 // authorization middleware
 app.use(auth);
 // Protected Routes
@@ -29,7 +30,3 @@ app.use(authRouter.routes());
 app.use(authRouter.allowedMethods());
 
 await app.listen({ port: 8000 });
-
-// const mainRouter = new Router();
-
-// app.use(mainRouter.routes());

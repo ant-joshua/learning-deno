@@ -1,4 +1,4 @@
-import { Context } from "https://deno.land/x/oak/mod.ts";
+import { Context } from "../../deps.ts";
 
 export const DefaultCORSConfig: CORSConfig = {
   // skipper: DefaultSkipper,
@@ -74,6 +74,7 @@ export const cors = (config: CORSConfig) =>
     response.headers.append("Vary", "Access-Control-Allow-Methods");
     response.headers.append("Vary", "Access-Control-Allow-Headers");
     response.headers.set("Access-Control-Allow-Origin", allowOrigin);
+    console.log(config);
     response.headers.set(
       "Access-Control-Allow-Methods",
       config.allowMethods!.join(","),

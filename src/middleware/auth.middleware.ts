@@ -1,5 +1,4 @@
-import { Context } from "https://deno.land/x/oak/mod.ts";
-import { validateJwt } from "https://deno.land/x/djwt/validate.ts";
+import { Context, validateJwt } from "../../deps.ts";
 import { getUserByUsername } from "../models/user.ts";
 const key = "emangmantul123";
 export const auth = async (ctx: Context, next: () => Promise<void>) => {
@@ -7,7 +6,7 @@ export const auth = async (ctx: Context, next: () => Promise<void>) => {
   // Get Authorization Header
   const authorization = ctx.request.headers.get("Authorization");
   // Get Token in Authorization Header
-  const jwt = authorization?.replace("Bearer ", "") ?? "";
+  const jwt = authorization!.replace("Bearer ", "");
   // Validate JWT Token
   const tokenValid = await validateJwt(jwt, key, { isThrowing: false });
   if (tokenValid) {

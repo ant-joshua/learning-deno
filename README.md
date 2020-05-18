@@ -10,17 +10,19 @@
 - [x] Register
 - [x] Connect To MongoDB
 - [x] CRUD Category
-- [] Login
-- [] Validation
-- [] Log Middleware
-- [] Error Handling
-- [x] Auth Middleware (JWT)
-- [] Websocket
-- [] Cache ( Redis ) 
-- [] Open API / Swagger 
-- [] Oauth2
-- [] File Upload
-- [] Task Scheduling
-- [] Serialization
-- [] Testing
+- [ ] Login
+- [ ] Validation
+- [ ] Error Handling
+- [ ] Websocket
+- [ ] Cache ( Redis ) 
+- [ ] Open API / Swagger 
+- [ ] Oauth2
+- [ ] File Upload
+- [ ] Task Scheduling
+- [ ] Serialization
+- [ ] Testing
 - [x] Use deps.ts
+- [x] dotenv
+- [x] Auth Middleware (JWT)
+- [ ] Log Middleware
+- [x] Cors Middleware

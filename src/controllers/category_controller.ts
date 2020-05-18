@@ -3,7 +3,7 @@ import {
   Response,
   RouteParams,
   State,
-} from "https://deno.land/x/oak/mod.ts";
+} from "../../deps.ts";
 import db from "../../db.ts";
 import { Category } from "../models/category.ts";
 
@@ -39,11 +39,12 @@ export const createCategory = async (
 ) => {
   try {
     const body = await request.body();
-    const { value : { name } } = body;
+
     if (!Object.keys(body.value).length) {
       response.status = 422;
       response.body = JSON.stringify({ errors: "Error" });
     }
+    const { value : { name } } = body;
 
     const insertedCategory = await categories.insertOne({
       name,
